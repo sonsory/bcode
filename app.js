@@ -31,12 +31,14 @@ app.use(flash())
 app.use(session({secret:'MySecret'}))
 
 //passport
-// var passport = require( './config/passport' )
-// app.use(passport.initialize())
-// app.use(passport.session())
+var passport = require( './config/passport' )
+app.use(passport.initialize())
+app.use(passport.session())
 
 //routes
-//require("./routes")( app, passport )
+require("./routes")( app, passport );
+
+
 
 
 
