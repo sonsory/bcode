@@ -2,30 +2,32 @@
     var takePicture = document.querySelector("#take-picture"),
         showPicture = document.querySelector("#show-picture");
 
-    if (takePicture &amp;&amp; showPicture) {
-        // 이벤트 설정
+    if (takePicture && showPicture) {
+        // Set events
         takePicture.onchange = function (event) {
-            // 찍은 사진이나 파일에 대한 참조 얻기
+            // Get a reference to the taken picture or chosen file
             var files = event.target.files,
                 file;
             if (files && files.length > 0) {
                 file = files[0];
                 try {
-                    // window.URL 객체 얻기
+                    // Get window.URL object
                     var URL = window.URL || window.webkitURL;
 
-                    // ObjectURL 생성
+                    // Create ObjectURL
                     var imgURL = URL.createObjectURL(file);
 
-                    // src에 ObjectURL 지정
+                    // Set img src to ObjectURL
                     showPicture.src = imgURL;
 
-                    // Revoke ObjectURL
-                    URL.revokeObjectURL(imgURL);
+                    // Revoke ObjectURL after imagehas loaded
+                    showPicture.onload = function() {
+                        URL.revokeObjectURL(imgURL);
+                    };
                 }
                 catch (e) {
                     try {
-                        // createObjectURL을 지원하지 않는 경우 대안
+                        // Fallback if createObjectURL is not supported
                         var fileReader = new FileReader();
                         fileReader.onload = function (event) {
                             showPicture.src = event.target.result;
@@ -33,7 +35,7 @@
                         fileReader.readAsDataURL(file);
                     }
                     catch (e) {
-                        //
+                        // Display error message
                         var error = document.querySelector("#error");
                         if (error) {
                             error.innerHTML = "Neither createObjectURL or FileReader are supported";

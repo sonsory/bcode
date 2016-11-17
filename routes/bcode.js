@@ -14,5 +14,18 @@ router.get( '/gravity', function( req, res ){
 
 })
 
+router.get( '/test2', function( req, res ){
+
+  res.render( 'test2', {body_template: 'body/index'} )
+
+})
+
+
+
+router.get( '/test3', function( req, res ){
+
+  res.render( 'test3', {body_template: 'body/index'} )
+
+})
 
 module.exports = router
