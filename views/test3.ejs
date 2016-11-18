@@ -45,7 +45,7 @@
 <body>
   <div id="container">
 
-    <div class="highlight">
+    <%# <div class="highlight">
       <p>New codelab: <a href="https://codelabs.developers.google.com/codelabs/webrtc-web">Realtime communication with WebRTC</a></p>
     </div>
 
@@ -53,25 +53,29 @@
 
     <p>Get available audio, video sources and audio output devices<b>*</b> from <code>mediaDevices.enumerateDevices()</code> then set the source for <code>getUserMedia()</code> using a <code>deviceId</code> constraint.</p>
 
-    <p class="small"><b>*</b>Enable experimental support in <b>Chrome 45.0.2441.x</b> or later by selecting <b>Enable experimental Web Platform features</b> in <b>chrome://flags</b> or by using command line flag "<b>--enable-blink-features=EnumerateDevices,AudioOutputDevices</b>". Use the <code>setSinkID()</code> method on the video element and provide a audio or video element and a sinkId (<code>deviceId</code> for where <code>deviceInfo.kind === 'audiooutput'</code>) as arguments. Also the web page must be served over HTTPS.</p>
+    <p class="small"><b>*</b>Enable experimental support in <b>Chrome 45.0.2441.x</b> or later by selecting <b>Enable experimental Web Platform features</b> in <b>chrome://flags</b> or by using command line flag "<b>--enable-blink-features=EnumerateDevices,AudioOutputDevices</b>". Use the <code>setSinkID()</code> method on the video element and provide a audio or video element and a sinkId (<code>deviceId</code> for where <code>deviceInfo.kind === 'audiooutput'</code>) as arguments. Also the web page must be served over HTTPS.</p>%>
 
-    <div class="select">
-      <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
+    <div class="select" style="display: none;">
+      <label for="audioSource"><%#Audio input source: %></label><select id="audioSource"></select>
+    </div>
+
+    <div class="select" style="display: none;">
+      <label for="audioOutput"><%#Audio output destination: %></label><select id="audioOutput"></select>
     </div>
 
     <div class="select">
-      <label for="audioOutput">Audio output destination: </label><select id="audioOutput"></select>
+      <label for="videoSource">Scan source: </label><select id="videoSource"></select> <button id="snap">bCODE scan</button>
     </div>
+    <br>
 
-    <div class="select">
-      <label for="videoSource">Video source: </label><select id="videoSource"></select>
-    </div>
+    <video id="video" width="320" height="240" autoplay></video><br>
 
-    <video id="video" autoplay></video>
+    <canvas id="canvas" width="320" height="240"></canvas>
 
+<%#
     <p class="small"><b>Note:</b> If you hear a reverb sound your microphone is picking up the output of your speakers/headset, lower the volume and/or move the microphone further away from your speakers/headset.</p>
 
-    <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/devices/input-output" title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
+    <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/devices/input-output" title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>%>
   </div>
 
   <script src="/js/camera3/adapter.js"></script> <%# 이거하고 바로 아래 스크립트 두개 적용안했을 때, 맥에서는 카메라가 작동되지만, 폰에서는 안됐음 %>

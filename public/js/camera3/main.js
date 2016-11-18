@@ -113,3 +113,15 @@ start();
 function handleError(error) {
   console.log('navigator.getUserMedia error: ', error);
 }
+
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.getElementById('video');
+
+document.getElementById("snap").addEventListener("click", function() {
+	context.drawImage(video, 0, 0, 320, 240);
+});
+
+
+document.getElementById("audioSource").style.display = 'none';
+document.getElementById("audioOutput").style.display = 'none';
