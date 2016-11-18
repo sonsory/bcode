@@ -115,8 +115,10 @@ function handleError(error) {
 }
 
 var canvas = document.getElementById('canvas');
+console.log( "js - canvas : ", canvas )
 var context = canvas.getContext('2d');
 var video = document.getElementById('video');
+console.log( "js - video : ", video )
 
 document.getElementById("snap").addEventListener("click", function() {
 	context.drawImage(video, 0, 0, 320, 240);
