@@ -20,6 +20,7 @@ var methodOverride = require('method-override');
 
 //view engine
 app.set("view engine", 'ejs')
+//app.set("view engine", 'jade')
 
 //middleware
 app.use(express.static(path.join(__dirname, 'public')))

@@ -1,0 +1,88 @@
+body {
+  background: #ffaa01;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.card {
+  align-content: flex-start;
+  background: #999;
+  box-shadow: 0px 0px 100px 10px rgba(0,0,0,.3);
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 300px;
+  height: 300px;
+}
+
+.tile {
+  height: 100px;
+  margin: 0;
+  width: 100px;
+}
+
+.red {
+  background: #cf1d35;
+}
+
+.dark{
+  background: #282828
+}
+
+.blue {
+  background: #40bfb6;
+}
+
+.brown {
+  background: #4c1f00;
+}
+
+.orange {
+  background: #ff7000;
+}
+
+.yellow {
+  background: #ffbe00;
+}
+
+.main {
+  animation:sonar 5s infinite;
+  background: black;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Ravi Prakash', cursive;
+  line-height: 110px;
+  text-align: center;
+  text-shadow: 0px 0px #ffaa01;
+  width: 300px;
+}
+
+.main:before {
+  content: "Happy Thanksgiving!";
+}
+
+.contract {
+  box-shadow: inset 0px 0px 0px 20px rgba(0,0,0,.5);
+  transition: box-shadow 1s ease;
+}
+
+.expand {
+  box-shadow: none;
+  transition: box-shadow 1s ease;
+}
+
+
+@keyframes sonar {
+  80% {
+    text-shadow:0px 0px #ffaa01;
+  }
+  100% {
+    text-shadow:5px 5px black,-5px 5px black,
+      -5px -5px black,5px -5px black;
+  }
+}

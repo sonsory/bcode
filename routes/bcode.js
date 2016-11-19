@@ -28,4 +28,10 @@ router.get( '/test3', function( req, res ){
 
 })
 
+router.get( '/bcode', function( req, res ){
+
+  res.render( 'bcode', {body_template: 'body/index'} )
+
+})
+
 module.exports = router

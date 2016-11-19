@@ -108,6 +108,7 @@ audioInputSelect.onchange = start;
 audioOutputSelect.onchange = changeAudioDestination;
 videoSelect.onchange = start;
 
+console.log("start : ", start)
 start();
 
 function handleError(error) {
