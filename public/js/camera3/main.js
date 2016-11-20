@@ -9,8 +9,8 @@
 'use strict';
 
 var videoElement = document.querySelector('video');
-var audioInputSelect = document.querySelector('select#audioSource');
-var audioOutputSelect = document.querySelector('select#audioOutput');
+// var audioInputSelect = document.querySelector('select#audioSource');
+// var audioOutputSelect = document.querySelector('select#audioOutput');
 var videoSelect = document.querySelector('select#videoSource');
 var selectors = [videoSelect];
 //var selectors = [audioInputSelect, audioOutputSelect, videoSelect];
@@ -30,15 +30,16 @@ function gotDevices(deviceInfos) {
     var deviceInfo = deviceInfos[i];
     var option = document.createElement('option');
     option.value = deviceInfo.deviceId;
-    if (deviceInfo.kind === 'audioinput') {
-      option.text = deviceInfo.label ||
-          'microphone ' + (audioInputSelect.length + 1);
-      audioInputSelect.appendChild(option);
-    } else if (deviceInfo.kind === 'audiooutput') {
-      option.text = deviceInfo.label || 'speaker ' +
-          (audioOutputSelect.length + 1);
-      audioOutputSelect.appendChild(option);
-    } else if (deviceInfo.kind === 'videoinput') {
+    // if (deviceInfo.kind === 'audioinput') {
+    //   option.text = deviceInfo.label ||
+    //       'microphone ' + (audioInputSelect.length + 1);
+    //   audioInputSelect.appendChild(option);
+    // } else if (deviceInfo.kind === 'audiooutput') {
+    //   option.text = deviceInfo.label || 'speaker ' +
+    //       (audioOutputSelect.length + 1);
+    //   audioOutputSelect.appendChild(option);
+    // } else
+    if (deviceInfo.kind === 'videoinput') {
       option.text = deviceInfo.label || 'camera ' + (videoSelect.length + 1);
       videoSelect.appendChild(option);
     } else {
@@ -71,7 +72,7 @@ function attachSinkId(element, sinkId) {
       }
       console.error(errorMessage);
       // Jump back to first output device in the list as it's the default.
-      audioOutputSelect.selectedIndex = 0;
+      //audioOutputSelect.selectedIndex = 0;
     });
   } else {
     console.warn('Browser does not support output device selection.');
@@ -96,20 +97,20 @@ function start() {
       track.stop();
     });
   }
-  var audioSource = audioInputSelect.value;
+  //var audioSource = audioInputSelect.value;
   var videoSource = videoSelect.value;
   console.log("videoSource : ", videoSource)
   var constraints = {
-    audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
+  //  audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
     video: {deviceId: videoSource ? {exact: videoSource} : undefined}
   };
   navigator.mediaDevices.getUserMedia(constraints).
       then(gotStream).then(gotDevices).catch(handleError);
 }
 
-audioInputSelect.onchange = start;
-audioOutputSelect.onchange = changeAudioDestination;
-videoSelect.onchange = start();
+//audioInputSelect.onchange = start;
+//audioOutputSelect.onchange = changeAudioDestination;
+videoSelect.onchange = start;
 
 console.log("start : ", start)
 start();
