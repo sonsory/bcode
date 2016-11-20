@@ -3,7 +3,7 @@ var router    = require('express').Router();
 
 router.get( '/', function( req, res ){
 
-  res.render( 'bcodeMain', {body_template: 'body/index'} )
+  res.render( 'bcode', {body_template: 'body/index'} )
 
 })
 
