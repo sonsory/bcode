@@ -42,8 +42,9 @@ function gotDevices(deviceInfos) {
     if (deviceInfo.kind === 'videoinput') {
       option.text = deviceInfo.label || 'camera ' + (videoSelect.length + 1);
       videoSelect.appendChild(option);
+      console.log('video info: ', deviceInfo)
     } else {
-      console.log('Some other kind of source/device: ', deviceInfo);
+      //console.log('Some other kind of source/device: ', deviceInfo);
     }
   }
   selectors.forEach(function(select, selectorIndex) {
@@ -79,10 +80,10 @@ function attachSinkId(element, sinkId) {
   }
 }
 
-function changeAudioDestination() {
-  var audioDestination = audioOutputSelect.value;
-  attachSinkId(videoElement, audioDestination);
-}
+// function changeAudioDestination() {
+//   var audioDestination = audioOutputSelect.value;
+//   attachSinkId(videoElement, audioDestination);
+// }
 
 function gotStream(stream) {
   window.stream = stream; // make stream available to console
@@ -119,7 +120,7 @@ function handleError(error) {
   console.log('navigator.getUserMedia error: ', error);
 }
 
-// var canvas = document.getElementById('canvas');
+var canvas = document.getElementById('canvas');
 // console.log( "js - canvas : ", canvas )
 var context = canvas.getContext('2d');
 console.log( "context : ", video )
@@ -131,6 +132,13 @@ document.getElementById("snap").addEventListener("click", function() {
 	context.drawImage(video, 0, 0, 320, 240);
   console.log("context:", context)
 });
+
+document.getElementById("video").addEventListener("click", function() {
+	context.drawImage(video, 0, 0, 210, 150);
+  console.log("context:", context)
+});
+
+
 
 
 document.getElementById("audioSource").style.display = 'none';
