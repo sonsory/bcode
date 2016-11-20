@@ -12,7 +12,9 @@ var videoElement = document.querySelector('video');
 var audioInputSelect = document.querySelector('select#audioSource');
 var audioOutputSelect = document.querySelector('select#audioOutput');
 var videoSelect = document.querySelector('select#videoSource');
-var selectors = [audioInputSelect, audioOutputSelect, videoSelect];
+var selectors = [videoSelect];
+//var selectors = [audioInputSelect, audioOutputSelect, videoSelect];
+
 
 function gotDevices(deviceInfos) {
   // Handles being called several times to update labels. Preserve values.
@@ -96,6 +98,7 @@ function start() {
   }
   var audioSource = audioInputSelect.value;
   var videoSource = videoSelect.value;
+  console.log("videoSource : ", videoSource)
   var constraints = {
     audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
     video: {deviceId: videoSource ? {exact: videoSource} : undefined}
@@ -106,7 +109,7 @@ function start() {
 
 audioInputSelect.onchange = start;
 audioOutputSelect.onchange = changeAudioDestination;
-videoSelect.onchange = start;
+videoSelect.onchange = start();
 
 console.log("start : ", start)
 start();
@@ -115,14 +118,17 @@ function handleError(error) {
   console.log('navigator.getUserMedia error: ', error);
 }
 
-var canvas = document.getElementById('canvas');
-console.log( "js - canvas : ", canvas )
+// var canvas = document.getElementById('canvas');
+// console.log( "js - canvas : ", canvas )
 var context = canvas.getContext('2d');
+console.log( "context : ", video )
+
 var video = document.getElementById('video');
-console.log( "js - video : ", video )
+// console.log( "js - video : ", video )
 
 document.getElementById("snap").addEventListener("click", function() {
 	context.drawImage(video, 0, 0, 320, 240);
+  console.log("context:", context)
 });
 
 
