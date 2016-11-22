@@ -8,7 +8,8 @@
 -->
 <html>
 <head>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/test3.css">
   <meta charset="utf-8">
   <meta name="description" content="WebRTC code samples">
   <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
@@ -38,6 +39,8 @@
       width: 12em;
       display: inline-block;
     }
+
+    .my-box { border:2px solid; padding:0px; width: 65px; height: 65px; }
   </style>
 
 </head>
@@ -64,21 +67,85 @@
     </div>
 
     <div class="select">
-      <label for="videoSource" style= "width: 100px">Scan source: </label><select id="videoSource"></select> <button id="snap">bCODE scan</button>
+      <label for="videoSource" style= "width: 100px">Scan source: </label><select id="videoSource"></select> <%#  %>
+      <button id="scanButton">bCODE scan</button><button id="setButton">bCODE setting</button>
     </div>
     <br>
 
-    <video id="video" style="width:300px; height:150px"  autoplay></video><br> <%#style="width:150px; height:267px" style="width:320px; height:240px" %>
-<div id="aaa">zzzz</div>
-ddddddd
+    <div id="scan" style="text-align:center; border:1px;">
+    <video id="video" style="width:300px; height:150px; border: 1px solid #ccc;"  autoplay></video><br> <%#style="width:150px; height:267px" style="width:320px; height:240px" %>
+    <button id="snap">bCODE scan</button>
+    </div>
 
 
 
 <%# if ( canvas != "") {%>
-    <canvas id="canvas" ></canvas>
+    <div id="view" style="text-align:center; border:2px solid #bbb;">
+    <canvas id="canvas" style="width:300px;height:150px;text-align:center;border: 1px solid #ccc;padding-left: 70px;"></canvas><br>
+    <button id="backToScan">backToScan</button>
+    </div>
+
+    <div id="set">
+
+
+  <div class="container" style="height: 450px;">
+
+    <div class="card">
+
+      <div class="my-box">
+        <div class="tile1">
+        </div>
+      </div>
+
+      <div class="my-box">
+        <div class="tile2">
+        </div>
+      </div>
+
+      <div class="my-box">
+        <div class="tile3">
+        </div>
+      </div>
+
+      <div class="my-box">
+        <div class="tile4">
+        </div>
+      </div>
+
+      <div class="my-box">
+        <div class="tile5">
+        </div>
+      </div>
+
+      <div class="my-box">
+        <div class="tile6">
+        </div>
+      </div>
+
+      <div class="my-box">
+        <div class="tile7">
+        </div>
+      </div>
+
+      <div class="my-box">
+        <div class="tile8">
+        </div>
+      </div>
+
+      <div class="my-box">
+        <div class="tile9">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
     <script>
 
-    console.log("context : ",  canvas.getContext('2d') )
+    console.log("test3.ejs - context : ",  canvas.getContext('2d') )
 
     </script>
 
