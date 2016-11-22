@@ -40,7 +40,25 @@
       display: inline-block;
     }
 
-    .my-box { border:2px solid; padding:0px; width: 65px; height: 65px; }
+    #main {
+        width: 220px;
+        height: 300px;
+        border: 1px solid black;
+        display: -webkit-flex; /* Safari */
+        -webkit-align-items: flex-start; /* Safari 7.0+ */
+        display: flex;
+        align-items: flex-start;
+    }
+
+    #main div {
+        -webkit-flex: 1; /* Safari 6.1+ */
+        flex: 1;
+    }
+
+    #myBlueDiv {
+        -webkit-align-self: center; /* Safari 7.0+ */
+        align-self: center;
+    }
   </style>
 
 </head>
@@ -70,72 +88,95 @@
       <label for="videoSource" style= "width: 100px">Scan source: </label><select id="videoSource"></select> <%#  %>
       <button id="scanButton">bCODE scan</button><button id="setButton">bCODE setting</button>
     </div>
-    <br>
 
-    <div id="scan" style="text-align:center; border:1px;">
+
+<br><br>
+    <div id="scan" style="text-align:center; border:1px solid #ddd;">
     <video id="video" style="width:300px; height:150px; border: 1px solid #ccc;"  autoplay></video><br> <%#style="width:150px; height:267px" style="width:320px; height:240px" %>
     <button id="snap">bCODE scan</button>
+    <div class="img">
+      <div class="containerVideo" style="margin: auto">
+
+
+        <div class="cardVideo">
+
+          <div id="tile11" class="myboxVideo" style="background:white;">
+          </div>
+
+          <div id="tile22" class="myboxVideo" style="background:black;">
+          </div>
+
+          <div id="tile33" class="myboxVideo" style="background:black;">
+          </div>
+
+          <div id="tile44" class="myboxVideo" style="background:black;">
+          </div>
+
+          <div id="tile55" class="myboxVideo" style="background:black;">
+          </div>
+
+          <div id="tile66" class="myboxVideo" style="background:black;" >
+          </div>
+
+          <div id="tile77" class="myboxVideo" style="background:black;">
+          </div>
+
+          <div id="tile88" class="myboxVideo" style="background:black;">
+          </div>
+
+          <div id="tile99" class="myboxVideo" style="background:black;">
+          </div>
+
+        </div>
+      </div>
+    </div> <%# div img %>
+
+
     </div>
 
 
 
+
 <%# if ( canvas != "") {%>
+<br>
     <div id="view" style="text-align:center; border:2px solid #bbb;">
     <canvas id="canvas" style="width:300px;height:150px;text-align:center;border: 1px solid #ccc;padding-left: 70px;"></canvas><br>
     <button id="backToScan">backToScan</button>
     </div>
 
+<br><br>
     <div id="set">
-
-
   <div class="container" style="height: 450px;">
 
     <div class="card">
 
-      <div class="my-box">
-        <div class="tile1">
-        </div>
+      <div id="tile1" class="mybox" style="background:white;">
       </div>
 
-      <div class="my-box">
-        <div class="tile2">
-        </div>
+      <div id="tile2" class="mybox" style="background:black;">
       </div>
 
-      <div class="my-box">
-        <div class="tile3">
-        </div>
+      <div id="tile3" class="mybox" style="background:black;">
       </div>
 
-      <div class="my-box">
-        <div class="tile4">
-        </div>
+      <div id="tile4" class="mybox" style="background:black;">
       </div>
 
-      <div class="my-box">
-        <div class="tile5">
-        </div>
+      <div id="tile5" class="mybox" style="background:black;">
       </div>
 
-      <div class="my-box">
-        <div class="tile6">
-        </div>
+      <div id="tile6" class="mybox" style="background:black;" >
       </div>
 
-      <div class="my-box">
-        <div class="tile7">
-        </div>
+      <div id="tile7" class="mybox" style="background:black;">
       </div>
 
-      <div class="my-box">
-        <div class="tile8">
-        </div>
+      <div id="tile8" class="mybox" style="background:black;">
       </div>
 
-      <div class="my-box">
-        <div class="tile9">
-        </div>
+      <div id="tile9" class="mybox" style="background:black;">
       </div>
+
     </div>
   </div>
 </div>
@@ -143,9 +184,16 @@
 
 
 
+
+
+
     <script>
 
     console.log("test3.ejs - context : ",  canvas.getContext('2d') )
+    console.log("id:tile6.value :", document.getElementById("tile6").style)
+    var tile6 = document.getElementById("tile6")
+    console.log("id:tile6.value :", tile6.value)
+
 
     </script>
 
