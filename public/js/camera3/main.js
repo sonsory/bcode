@@ -133,7 +133,7 @@ console.log("context:", video.videoHeight)
 console.log("context:", video.videoWidth)
   // $(canvas).width( video.videoWidth /4)
   // $(canvas).height( video.videoHeight /4)
-  context.drawImage(video, 213, 480*0.5/4+60, 213,60, 0, 0, 150, 150);
+  context.drawImage(video, 213, 480*0.5/4+120, 213, 120, 0, 0, 150, 150);
 
   console.log(context.getImageData(0,0,150,150))
 });
