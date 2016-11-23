@@ -14,7 +14,7 @@ var videoElement = document.querySelector('video');
 var videoSelect = document.querySelector('select#videoSource');
 var selectors = [videoSelect];
 //var selectors = [audioInputSelect, audioOutputSelect, videoSelect];
-
+var init = true
 
 function gotDevices(deviceInfos) {
   // Handles being called several times to update labels. Preserve values.
@@ -26,10 +26,10 @@ function gotDevices(deviceInfos) {
       select.removeChild(select.firstChild);
     }
   });
+  var cnt = 1
   for (var i = 0; i !== deviceInfos.length; ++i) {
     var deviceInfo = deviceInfos[i];
     var option = document.createElement('option');
-    option.value = deviceInfo.deviceId;
     // if (deviceInfo.kind === 'audioinput') {
     //   option.text = deviceInfo.label ||
     //       'microphone ' + (audioInputSelect.length + 1);
@@ -40,7 +40,10 @@ function gotDevices(deviceInfos) {
     //   audioOutputSelect.appendChild(option);
     // } else
     if (deviceInfo.kind === 'videoinput') {
-      option.text = deviceInfo.label || 'camera ' + (videoSelect.length + 1);
+      //option.text = deviceInfo.label || 'camera ' + (videoSelect.length + 1);
+      option.id = "camera_" + cnt;
+      option.text = 'Camera ' + cnt++;
+      option.value = deviceInfo.deviceId;
       videoSelect.appendChild(option);
       console.log('video info: ', deviceInfo)
     } else {
@@ -54,6 +57,16 @@ function gotDevices(deviceInfos) {
       select.value = values[selectorIndex];
     }
   });
+
+  if( init ){
+    var id = $("#camera_2").val()
+    if( id != undefined ){
+      $("#videoSource").val(id).change()
+    } else {
+      start()
+    }
+    init = false 
+  }
 }
 
 navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(handleError);
@@ -114,7 +127,7 @@ function start() {
 videoSelect.onchange = start;
 
 console.log("start : ", start)
-start();
+//start();
 
 function handleError(error) {
   console.log('navigator.getUserMedia error: ', error);
@@ -123,24 +136,81 @@ function handleError(error) {
 var canvas = document.getElementById('canvas');
 // console.log( "js - canvas : ", canvas )
 var context = canvas.getContext('2d');
+
 console.log( "context : ", context )
 
 var video = document.getElementById('video');
 // console.log( "js - video : ", video )
+var th = 20
+
+function findPosition(){
+  console.log("context:", video.videoHeight)
+  console.log("context:", video.videoWidth)
+  
+  context.drawImage(video, 160+th, 240+th, 160-th*2, 160-th*2, 0, 0, 150, 150);
+
+  var imageData = context.getImageData(0, 0, 150, 150);
+  var data = imageData.data;
+
+  var sum_array = [[0,0,0],[0,0,0],[0,0,0]]
+
+  for(var i = 0; i < data.length; i += 4) {
+    var brightness = 0.34 * data[i] + 0.5 * data[i + 1] + 0.16 * data[i + 2];
+    // red
+    data[i] = brightness;
+    // green
+    data[i + 1] = brightness;
+    // blue
+    data[i + 2] = brightness;
+
+    if( (i/4)%150 < 50 ){
+      var y = 0
+    } else if( (i/4)%150 < 100 ){
+      var y = 1
+    } else {
+      var y = 2
+    }
+
+    if( (i/4)/150 < 50 ){
+      var x = 0
+    } else if( (i/4)/150 < 100 ){
+      var x = 1
+    } else {
+      var x = 2
+    }
+
+    sum_array[x][y] = sum_array[x][y] + brightness
+  }
+
+  var new_array = []
+  var new_array_01 = []
+  var sum = 0
+  for(var i=0; i< sum_array.length; i++){
+    new_array = new_array.concat(sum_array[i])
+  }
+  for(var i=0; i< new_array.length; i++){
+    sum = sum + new_array[i]
+  }
+  var avg = sum / 9
+  for(var i=0; i< new_array.length; i++){
+    new_array[i] = Math.round((new_array[i] / avg)*100)
+    if( new_array[i] < 100 ){
+      new_array_01[i] = 1
+    } else {
+      new_array_01[i] = 0
+    }
+  }
+  //console.log(new_array)
+  $("#tempOutput").text(new_array)
+  $("#tempOutput2").text(new_array_01)
+}
 
 document.getElementById("snap").addEventListener("click", function() {
-console.log("context:", video.videoHeight)
-console.log("context:", video.videoWidth)
-  // $(canvas).width( video.videoWidth /4)
-  // $(canvas).height( video.videoHeight /4)
-  context.drawImage(video, 480*0.5/4+120,213,   120,213, 0, 0, 150, 150);
-
-  console.log(context.getImageData(0,0,150,150))
+  findPosition()
 });
 
 document.getElementById("video").addEventListener("click", function() {
-	context.drawImage(video, 0, 0/*, video.videoWidth /4 *1.3, video.videoHeight /4 *1.3*/);
-  console.log("context:", context)
+	findPosition()
 });
 
 
