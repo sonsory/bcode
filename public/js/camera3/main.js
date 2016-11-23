@@ -131,6 +131,7 @@ var video = document.getElementById('video');
 document.getElementById("snap").addEventListener("click", function() {
 console.log("context:", video.videoHeight)
 console.log("context:", video.videoWidth)
+alert(video.videoHeight+' '+video.videoWidth)
   // $(canvas).width( video.videoWidth /4)
   // $(canvas).height( video.videoHeight /4)
   context.drawImage(video, 0, 0, video.videoWidth /4 *1.3  , video.videoHeight /4 *1.3 );
