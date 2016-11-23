@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(cookieParser())
 app.use(methodOverride("_method"))
 app.use(flash())
-app.use(session({secret:'MySecret'}))
+app.use(session({secret:'MySecret',resave: false, saveUninitialized: true}))
 
 //passport
 var passport = require( './config/passport' )
@@ -38,10 +38,6 @@ app.use(passport.session())
 
 //routes
 require("./routes")( app, passport );
-
-
-
-
 
 //test
 app.get( '/test', function( req, res ){
@@ -54,3 +50,13 @@ http.listen(port, function(){
 
 
 })
+
+/*var fs = require('fs');
+var options = {
+  key: fs.readFileSync('./file.pem'),
+  cert: fs.readFileSync('./file.crt')
+};
+var https = require('https').Server(options,app);
+https.listen(3004, function(){
+  console.log("Server On!")
+})*/

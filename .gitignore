@@ -1,1 +1,5 @@
 node_module
+npm-debug.log
+file.pem
+file.crt
+csr.pem
