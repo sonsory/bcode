@@ -2,7 +2,7 @@
 
 var card = document.querySelector(".card");
 
-var tiles = ["dark", "", "dark", "", "dark", "",,, "dark"];
+var tiles = ["dark", "dark", "dark", "dark", "dark", "dark","dark","dark", "dark"];
 
 card.childNodes.forEach(function (child, i) {
 	if (child.style && !child.className.match("main")) {
