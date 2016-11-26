@@ -65,7 +65,7 @@ function gotDevices(deviceInfos) {
     } else {
       start()
     }
-    init = false 
+    init = false
   }
 }
 
@@ -146,7 +146,7 @@ var th = 20
 function findPosition(){
   console.log("context:", video.videoHeight)
   console.log("context:", video.videoWidth)
-  
+
   context.drawImage(video, 160+th, 240+th, 160-th*2, 160-th*2, 0, 0, 150, 150);
 
   var imageData = context.getImageData(0, 0, 150, 150);
@@ -246,24 +246,25 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  $("#setButton").click(function(){
+  $("#setButton").click(function(){ // myboxVideo -> mybox
     $("#setButton").hide();
     $("#scan").hide();
     $("#set").show();
     $("#scanButton").show();
     $("#view").hide();
-
+    exChage2()
   });
 });
 
 
 $(document).ready(function(){
-  $("#scanButton").click(function(){
+  $("#scanButton").click(function(){ // mybox -> myboxVideo
     $("#scanButton").hide();
     $("#set").hide();
     $("#setButton").show();
     $("#scan").show();
     $("#view").hide();
+    exChage();
   });
 });
 
@@ -531,17 +532,27 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $(".myboxVideo").click(function(){
+    if($(this).css('background-color') == 'rgb(255, 255, 255)')  {
+      var str = $(this).css('background-color','black')
+    } else {
+      $(this).css('background-color','white')
+    }
+
+    valSum()
+    valSumVideo()
+    })
+  $(".mybox").click(function(){
     if($(this).css('background-color') == 'rgb(255, 255, 255)')  {$(this).css('background-color','black')
   } else {
     $(this).css('background-color','white')
   }
-
   valSum()
+  valSumVideo()
 })
 })
 
 
-function valSum(){
+function valSumVideo(){
   var a=[]
   var cnt=0
 
@@ -553,34 +564,103 @@ function valSum(){
     }
     cnt++
   })
-  console.log("a[3] :", a[3])
+  console.log("valSumVideo : a[3] :", a[3])
 
 
-  /*if(document.getElementById("tile1").style.background == "black") a[0] =1
-  if(document.getElementById("tile2").style.background == "black") a[1] =1
-  if(document.getElementById("tile3").style.background == "black") a[2] =1
-  if(document.getElementById("tile4").style.background == "black") a[3] =1
-  if(document.getElementById("tile5").style.background == "black") a[4] =1
-  if(document.getElementById("tile6").style.background == "black") a[5] =1
-  if(document.getElementById("tile7").style.background == "black") a[6] =1
-  if(document.getElementById("tile8").style.background == "black") a[7] =1
-  if(document.getElementById("tile9").style.background == "black") a[8] =1
 
-  if(document.getElementById("tile1").style.background == "white") a[0] =0
-  if(document.getElementById("tile2").style.background == "white") a[1] =0
-  if(document.getElementById("tile3").style.background == "white") a[2] =0
-  if(document.getElementById("tile4").style.background == "white") a[3] =0
-  if(document.getElementById("tile5").style.background == "white") a[4] =0
-  if(document.getElementById("tile6").style.background == "white") a[5] =0
-  if(document.getElementById("tile7").style.background == "white") a[6] =0
-  if(document.getElementById("tile8").style.background == "white") a[7] =0
-  if(document.getElementById("tile9").style.background == "white") a[8] =0*/
 
-  console.log("a : ", a)
+  console.log("valSumVideo a : ", a)
   return a;
 
 }
 
+function valSum(){
+  var a=[]
+  var cnt=0
+
+
+  $('.mybox').each(function(){
+    if($(this).css('background-color') == 'rgb(255, 255, 255)'){
+      a[cnt] = 0
+    } else {
+      a[cnt] = 1
+    }
+    cnt++
+  })
+
+
+  console.log("valSum a : ", a)
+  return a;
+
+}
+
+
+function exChage(){
+  var a=[]
+  var b=[]
+  var cnt=0
+  $('.mybox').each(function(){
+    if($(this).css('background-color') == 'rgb(255, 255, 255)'){
+      a[cnt] = 0
+    } else {
+      a[cnt] = 1
+    }
+    cnt++
+  })
+  cnt=0
+   $('.myboxVideo').each(function(){
+     if(a[cnt] == 0){
+       $(this).css('background-color','white')
+     } else {
+       $(this).css('background-color','black')
+     }
+     cnt++
+   })
+ }
+
+
+ function exChage2(){
+   var a=[]
+   var b=[]
+   var cnt=0
+   $('.myboxVideo').each(function(){
+     if($(this).css('background-color') == 'rgb(255, 255, 255)'){
+       a[cnt] = 0
+     } else {
+       a[cnt] = 1
+     }
+     cnt++
+   })
+   cnt=0
+    $('.mybox').each(function(){
+      if(a[cnt] == 0){
+        $(this).css('background-color','white')
+      } else {
+        $(this).css('background-color','black')
+      }
+      cnt++
+    })
+  }
+
+/*if(document.getElementById("tile1").style.background == "black") a[0] =1
+if(document.getElementById("tile2").style.background == "black") a[1] =1
+if(document.getElementById("tile3").style.background == "black") a[2] =1
+if(document.getElementById("tile4").style.background == "black") a[3] =1
+if(document.getElementById("tile5").style.background == "black") a[4] =1
+if(document.getElementById("tile6").style.background == "black") a[5] =1
+if(document.getElementById("tile7").style.background == "black") a[6] =1
+if(document.getElementById("tile8").style.background == "black") a[7] =1
+if(document.getElementById("tile9").style.background == "black") a[8] =1
+
+if(document.getElementById("tile1").style.background == "white") a[0] =0
+if(document.getElementById("tile2").style.background == "white") a[1] =0
+if(document.getElementById("tile3").style.background == "white") a[2] =0
+if(document.getElementById("tile4").style.background == "white") a[3] =0
+if(document.getElementById("tile5").style.background == "white") a[4] =0
+if(document.getElementById("tile6").style.background == "white") a[5] =0
+if(document.getElementById("tile7").style.background == "white") a[6] =0
+if(document.getElementById("tile8").style.background == "white") a[7] =0
+if(document.getElementById("tile9").style.background == "white") a[8] =0*/
 
 
 
