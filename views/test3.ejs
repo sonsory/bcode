@@ -66,6 +66,27 @@
 <body>
   <div id="container">
 
+    <div id="list_btn_div" style="position: absolute;top: 5px;right: 5px;width:60px;height:30px;">
+      <button id="list_btn" style="background-color:#fff;border-radius:3px;border:1px solid #999;height:100%;width:100%;">LIST</button>
+    </div>
+
+    <div id="list_div" style="text-align:center;position:absolute;left:0px;top:0px;width:100%;height:100%;background-color:#fff;display:none;">
+      <button id="list_close_btn" style="background-color:#fff;border-radius:3px;border:1px solid #999;height:30px;width:60px;top:5px;right:5px;position:absolute;">CLOSE</button>
+      <table id="list_table" align="center" style="margin-top:100px;width:90%;">
+        <tr>
+          <th>
+            BCODE
+          </th>
+          <th>
+            LINK
+          </th>
+          <th>
+            EXPLAIN
+          </th>
+        </tr>
+      </table>
+    </div>
+
     <%# <div class="highlight">
       <p>New codelab: <a href="https://codelabs.developers.google.com/codelabs/webrtc-web">Realtime communication with WebRTC</a></p>
     </div>
@@ -148,7 +169,7 @@
 
 <br><br>
     <div id="set">
-  <div class="container" style="height: 450px;">
+  <div class="container" style="height: 300px;">
 
     <div class="card">
 
@@ -180,7 +201,34 @@
       </div>
 
     </div>
+
+  
   </div>
+  <div>
+    <table style="text-align: center;width:100%;">
+      <tr>
+        <td style="text-align:right;">
+          Link
+        </td>
+        <td>
+          <input type="text" id="link_input" style="border:1px solid;display:inline-table;"/>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:right;">
+          Explain
+        </td>
+        <td>
+          <input type="text" id="link_explain" style="border:1px solid;display:inline-table;"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="padding-top:20px;">
+          <button id="link_submit" style="background-color:#fff;border-radius:3px;border:1px solid #999;height:30px;width:60px;">Submit</button>
+        </td>
+      </tr>
+      
+    </div>
 </div>
 
 
@@ -209,6 +257,7 @@
   <script src="/js/camera3/adapter.js"></script> <%# 이거하고 바로 아래 스크립트 두개 적용안했을 때, 맥에서는 카메라가 작동되지만, 폰에서는 안됐음 %>
   <script src="/js/camera3/common.js"></script>
   <script src="/js/camera3/main.js"></script>
+  <script src="/js/list.js"></script>
 
 
 

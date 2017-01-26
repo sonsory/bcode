@@ -9,6 +9,9 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
 
+var low = require('lowdb');
+const db = low('db.json')
+
 //var battle = require('./middleware/battle')
 
 //var mongodb = require('mongodb');
@@ -42,6 +45,38 @@ require("./routes")( app, passport );
 //test
 app.get( '/test', function( req, res ){
   res.send('Perpect!!')
+})
+
+db.defaults({ list: [] })
+  .value()
+
+// POST /posts
+app.post('/create', (req, res) => {
+
+  var list = { id: Date.now(), link: req.body.link, explain: req.body.explain, bcode: req.body.bcode }
+  console.log(list)
+  var post = db.get('list')
+  .push(list)
+  .value()
+
+  res.send(post)
+})
+
+app.get('/list', (req, res) => {
+
+  var post = db.get('list')
+  .value()
+console.log(post)
+  res.send(post)
+})
+
+app.get('/find', (req, res) => {
+console.log(req.query)
+  var post = db.get('list')
+  .find({ bcode: req.query.bcode })
+  .value()
+console.log(post)
+  res.send(post)
 })
 
 var port = process.env.PORT || 3003

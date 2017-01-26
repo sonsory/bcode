@@ -192,17 +192,30 @@ function findPosition(){
     sum = sum + new_array[i]
   }
   var avg = sum / 9
+  var s = ''
   for(var i=0; i< new_array.length; i++){
     new_array[i] = Math.round((new_array[i] / avg)*100)
     if( new_array[i] < 100 ){
       new_array_01[i] = 1
+      s=s+'1'
     } else {
       new_array_01[i] = 0
+      s=s+'0'
     }
   }
   //console.log(new_array)
   $("#tempOutput").text(new_array)
-  $("#tempOutput2").text(new_array_01)
+  $("#tempOutput2").text(s)
+
+  $.ajax({
+      type: "GET",
+      url: '/find?bcode='+s,
+      success:function(data){
+        if( data ){
+          window.location = data.link
+        }
+      }
+    });
 }
 
 document.getElementById("snap").addEventListener("click", function() {
@@ -577,20 +590,22 @@ function valSumVideo(){
 function valSum(){
   var a=[]
   var cnt=0
-
+  var s=''
 
   $('.mybox').each(function(){
     if($(this).css('background-color') == 'rgb(255, 255, 255)'){
       a[cnt] = 0
+      s=s+'0'
     } else {
       a[cnt] = 1
+      s=s+'1'
     }
     cnt++
   })
 
 
   console.log("valSum a : ", a)
-  return a;
+  return s;
 
 }
 
